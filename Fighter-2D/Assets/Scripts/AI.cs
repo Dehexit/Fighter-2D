@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AI {
-
-	
+public class AI: Character {
+    public override void Attack() {
+        Debug.Log("Ataque de IA");
+    }
 }

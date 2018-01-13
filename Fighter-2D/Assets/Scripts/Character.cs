@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Characters : MonoBehaviour
+public class Character : MonoBehaviour
 {
+
+    public int lives;
 
     // Use this for initialization
     Player jug; 
@@ -41,18 +43,3 @@ public class Characters : MonoBehaviour
     
 }
 
-public class Player : Characters
-{
-    public override void Attack()
-    {
-        Debug.Log("Ataque de Player"); 
-    }
-}
-
-public class AI : Characters
-{
-    public override void Attack()
-    {
-        Debug.Log("Ataque de IA");
-    }
-}
