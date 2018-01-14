@@ -2,15 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DataRecord : MonoBehaviour {
+public class DataRecord {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public Dictionary<char, int> counts;
+    public int total;
+
+    public DataRecord() {
+        total = 0;
+        counts = new Dictionary<char, int>();
+    }
+
 }

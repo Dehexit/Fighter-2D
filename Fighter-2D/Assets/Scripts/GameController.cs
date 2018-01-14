@@ -27,6 +27,8 @@ public class GameController : MonoBehaviour {
         characters = new List<Character>(new Character[] { player, ai });
         attack = new Attack();
         gameOver = false;
+
+        //Mover a EndTurn?
         
         while(!gameOver) {
 
@@ -40,6 +42,10 @@ public class GameController : MonoBehaviour {
 
         //Game end behaviour
 
+    }
+
+    internal static void EndTurn(Character character) {
+        throw new NotImplementedException();
     }
 
     /// <summary>

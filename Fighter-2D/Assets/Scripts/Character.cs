@@ -7,6 +7,8 @@ public class Character : MonoBehaviour
 
     public int lives;
 
+    public Attack current_attack;
+
     // Use this for initialization
     Player jug; 
     AI ia; 

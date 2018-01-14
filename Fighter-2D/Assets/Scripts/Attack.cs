@@ -11,7 +11,14 @@ public class Attack {
         B,
         C
     }
-    //Attacks attack;
+    Attacks attack;
+
+    public Attack() {
+    }
+
+    public Attack(Attacks _attack) {
+        attack = _attack;
+    }
 
     public Attacks WinsTo(Attacks attack)
     {
