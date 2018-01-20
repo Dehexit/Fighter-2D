@@ -23,7 +23,7 @@ public class Character : MonoBehaviour
     void Start()
     {
         jug = new Player();
-        ia = new AI();
+        ia = new AI(jug);
     }
 
     // Update is called once per frame

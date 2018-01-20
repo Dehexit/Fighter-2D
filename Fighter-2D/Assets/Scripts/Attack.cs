@@ -36,4 +36,6 @@ public class Attack {
             return attack + 1;
     }
 
+    //public override ToString(Attacks attack) { }
+
 }

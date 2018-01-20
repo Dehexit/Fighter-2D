@@ -4,10 +4,18 @@ using UnityEngine;
 
 public class AI: Character {
 
+    public Player player;
+
+    private string opc = "";
+    private string totalElecs = "", predictGuess = "", registerGuess = "";
+    private int windowSize = 2;
+    private int total = 0, rightGuess = 0;
+
     private Dictionary<string, DataRecord> data;
     private string possibleActions;
 
-    public AI() {
+    public AI(Player player) {
+        this.player = player;
         data = new Dictionary<string, DataRecord>();
         possibleActions = "";
     }
@@ -52,5 +60,37 @@ public class AI: Character {
 
     public override void Attack() {
         Debug.Log("Ataque de IA");
+
+        opc = player.current_attack.ToString();
+        total++;
+
+        string prediction = GetMostLikely(predictGuess);
+
+        if (prediction == opc) {
+            rightGuess++;
+            Debug.Log("AI guessed rigth");
+        } else {
+            Debug.Log("AI failed guessing");
+        }
+        Debug.Log("Correct guess rate: " + (100 * (float)rightGuess / total));
+
+        totalElecs += opc;
+
+        if(totalElecs.Length - windowSize < 0) {
+            predictGuess += opc;
+        } else {
+            predictGuess = totalElecs.Substring(totalElecs.Length - windowSize);
+        }
+
+        if(totalElecs.Length - windowSize - 1 < 0) {
+            registerGuess += opc;
+        } else {
+            registerGuess = totalElecs.Substring(totalElecs.Length - (windowSize + 1));
+            RegisterSecuence(registerGuess);
+        }
+
+        Debug.Log("Total guesses: " + totalElecs);
+        Debug.Log("Prediction guesses: " + predictGuess);
+        Debug.Log("Register guesses: " + registerGuess);
     }
 }
