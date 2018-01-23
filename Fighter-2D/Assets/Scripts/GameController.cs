@@ -8,6 +8,7 @@ public class GameController : MonoBehaviour {
     public static GameController instance = null;   //To make GameController a singleton
 
     private Attack attack;
+    public string player_attack;
     private bool gameOver;
     private List<Character> characters;
 
@@ -24,28 +25,47 @@ public class GameController : MonoBehaviour {
             Destroy(gameObject);
         DontDestroyOnLoad(gameObject);
 
+        //Initialise in a menu
         characters = new List<Character>(new Character[] { player, ai });
+        player_attack = "";
         attack = new Attack();
         gameOver = false;
 
-        //Mover a EndTurn?
+        StartCoroutine(WaitForInput());
         
-        while(!gameOver) {
-
-            foreach(Character currentCharacter in characters) {
-                currentCharacter.Attack();
-            }
-
-            if(CheckWinner() != null)
-                gameOver = true;
-        }
-
-        //Game end behaviour
-
     }
 
-    internal static void EndTurn(Character character) {
-        throw new NotImplementedException();
+    private IEnumerator WaitForInput() {
+
+        player_attack = "";
+
+        while(player_attack == "") {
+            yield return new WaitForEndOfFrame();
+        }
+
+        Turn();
+    }
+
+    public void Turn() {
+
+        foreach (Character current in characters) {
+            current.Attack();
+        }
+
+        //Comparar ataques
+        if(characters[0].current_attack.WinsTo() == characters[1].current_attack.attack) {
+            //First character wins round
+            characters[0].lives--;
+        } else  {
+            //Second character wins round
+            characters[1].lives--;
+        }
+
+        if(CheckWinner() != null)
+            gameOver = true;
+        else
+            StartCoroutine(WaitForInput());
+
     }
 
     /// <summary>

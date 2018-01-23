@@ -11,7 +11,7 @@ public class Attack {
         B,
         C
     }
-    Attacks attack;
+    public Attacks attack;
 
     public Attack() {
     }
@@ -20,14 +20,26 @@ public class Attack {
         attack = _attack;
     }
 
+    public Attacks WinsTo() {
+        if((int)attack == 0)
+            return (Attacks)num_attacks - 1;
+        else
+            return attack - 1;
+    }
     public Attacks WinsTo(Attacks attack)
     {
-        if ((int)attack - 1 == -1)
+        if ((int)attack == 0)
             return (Attacks)num_attacks - 1;
         else
             return attack - 1;
     }
 
+    public Attacks LosesTo() {
+        if((int)attack + 1 == num_attacks)
+            return (Attacks)0;
+        else
+            return attack + 1;
+    }
     public Attacks LosesTo(Attacks attack)
     {
         if ((int)attack + 1 == num_attacks)

@@ -4,25 +4,13 @@ using UnityEngine;
 
 public class Player: Character {
 
+    public string current_attack_string;
+
     public override void Attack() {
         Debug.Log("Ataque de Player");
-        StartCoroutine(waitForInput());
-    }
+        //StartCoroutine(waitForInput());
 
-    private IEnumerator waitForInput() {
-
-        current_attack = null;
-
-        while(current_attack == null) {
-            yield return new WaitForEndOfFrame();
-        }
-
-        GameController.EndTurn(this);
-    }
-
-    public void setCurrentAttack(string s_attack) {
-
-        switch(s_attack) {
+        switch(current_attack_string) {
 
             case "attack1":
                 current_attack = new Attack(global::Attack.Attacks.A);
@@ -37,6 +25,13 @@ public class Player: Character {
                 Debug.Log("Error in attack buttons");
                 break;
         }
+
+    }
+
+    public void setCurrentAttack(string s_attack) {
+
+        current_attack_string = s_attack;
+        
     }
 
 }
