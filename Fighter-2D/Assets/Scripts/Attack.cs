@@ -6,48 +6,77 @@ public class Attack {
 
     public int num_attacks = 3;
 
-	public enum Attacks {
+	public enum AType {
         A,
         B,
         C
     }
-    public Attacks attack;
+    public AType type;
 
     public Attack() {
     }
-
-    public Attack(Attacks _attack) {
-        attack = _attack;
+    public Attack(AType _attack) {
+        type = _attack;
     }
 
-    public Attacks WinsTo() {
-        if((int)attack == 0)
-            return (Attacks)num_attacks - 1;
+    public AType WinsTo() {
+        if((int)type == 0)
+            return (AType)num_attacks - 1;
         else
-            return attack - 1;
+            return type - 1;
     }
-    public Attacks WinsTo(Attacks attack)
+    public AType WinsTo(AType attack)
     {
         if ((int)attack == 0)
-            return (Attacks)num_attacks - 1;
+            return (AType)num_attacks - 1;
         else
             return attack - 1;
     }
 
-    public Attacks LosesTo() {
-        if((int)attack + 1 == num_attacks)
-            return (Attacks)0;
+    public AType LosesTo() {
+        if((int)type + 1 == num_attacks)
+            return (AType)0;
         else
-            return attack + 1;
+            return type + 1;
     }
-    public Attacks LosesTo(Attacks attack)
+    public AType LosesTo(AType attack)
     {
         if ((int)attack + 1 == num_attacks)
-            return (Attacks)0;
+            return (AType)0;
         else
             return attack + 1;
     }
 
-    //public override ToString(Attacks attack) { }
+    public static AType stringToAttack(string s_attack) {
+
+        switch(s_attack) {
+
+            case "A":
+                return AType.A;
+            case "B":
+                return AType.B;
+            case "C":
+                return AType.C;
+            default:
+                Debug.Log("Error in attack buttons");
+                throw new System.Exception("Error in attack buttons");
+        }
+    }
+    
+    public override string ToString() {
+
+        switch(type) {
+
+            case AType.A:
+                return "A";
+            case AType.B:
+                return "B";
+            case AType.C:
+                return "C";
+            default:
+                Debug.Log("Error in attack buttons");
+                throw new System.Exception("Error in attack buttons");
+        }
+    }
 
 }

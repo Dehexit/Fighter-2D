@@ -14,10 +14,11 @@ public class AI: Character {
     private Dictionary<string, DataRecord> data;
     private string possibleActions;
 
-    public AI(Player player) {
+    public void initialize(Player player) {
         this.player = player;
+        lives = 3;
         data = new Dictionary<string, DataRecord>();
-        possibleActions = "";
+        possibleActions = "ABC";
     }
 
     public string GetMostLikely(string actions) {
@@ -58,13 +59,15 @@ public class AI: Character {
 
     }
 
-    public override void Attack() {
+    public override void DoAttack() {
         Debug.Log("Ataque de IA");
 
         opc = player.current_attack.ToString();
         total++;
 
         string prediction = GetMostLikely(predictGuess);
+        Debug.Log("AI guess: " + prediction);
+        current_attack = new Attack(Attack.stringToAttack(prediction));
 
         if (prediction == opc) {
             rightGuess++;

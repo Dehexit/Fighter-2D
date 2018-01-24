@@ -6,25 +6,15 @@ public class Player: Character {
 
     public string current_attack_string;
 
-    public override void Attack() {
+    public void initialize() {
+        lives = 3;
+    }
+
+    public override void DoAttack() {
         Debug.Log("Ataque de Player");
         //StartCoroutine(waitForInput());
 
-        switch(current_attack_string) {
-
-            case "attack1":
-                current_attack = new Attack(global::Attack.Attacks.A);
-                break;
-            case "attack2":
-                current_attack = new Attack(global::Attack.Attacks.B);
-                break;
-            case "attack3":
-                current_attack = new Attack(global::Attack.Attacks.C);
-                break;
-            default:
-                Debug.Log("Error in attack buttons");
-                break;
-        }
+        current_attack = new Attack(Attack.stringToAttack(current_attack_string));
 
     }
 

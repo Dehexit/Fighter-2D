@@ -13,35 +13,18 @@ public class Character : MonoBehaviour
     Player jug; 
     AI ia; 
 
-    public virtual void Attack()
+    public virtual void DoAttack()
     {
         Debug.Log("Ataque de Character");
 
     }
 
 
-    void Start()
-    {
-        jug = new Player();
-        ia = new AI(jug);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKey(KeyCode.A))
-        {
-            jug.Attack();
-            Debug.Log("A pulsado"); 
-        }
-
-        if (Input.GetKey(KeyCode.D))
-        {
-            ia.Attack();
-            Debug.Log("D pulsado");
-
-        }
-    }
+    //void Start()
+    //{
+    //    jug = new Player();
+    //    ia = new AI(jug);
+    //}
     
 }
 
