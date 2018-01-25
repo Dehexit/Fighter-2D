@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour {
 
@@ -13,6 +14,9 @@ public class GameController : MonoBehaviour {
 
     public Player player;
     public AI ai;
+
+    public Text p1_lives;
+    public Text p2_lives;
 
     // Use this for initialization
     void Awake () {
@@ -54,6 +58,7 @@ public class GameController : MonoBehaviour {
 
         foreach (Character current in characters) {
             current.DoAttack();
+            current.GetComponent<Animator>().Play("attack");
         }
 
         //Comparar ataques
@@ -61,13 +66,15 @@ public class GameController : MonoBehaviour {
             //First character wins round
             Debug.Log("Gana jugador 1");
             characters[1].lives--;
-        }else if(characters[0].current_attack.type == characters[1].current_attack.type) {
+            //characters[1].GetComponent<Animator>().Play("damaged");
+        } else if(characters[0].current_attack.type == characters[1].current_attack.type) {
             //Tie
             Debug.Log("Empate");
         } else  {
             //Second character wins round
             Debug.Log("Gana jugador 2");
-            characters[1].lives--;
+            characters[0].lives--;
+            //characters[0].GetComponent<Animator>().Play("damaged");
         }
 
         Character winner = CheckWinner();
@@ -107,8 +114,11 @@ public class GameController : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-		
-	}
+
+        p1_lives.text = ("VIDAS\n" + characters[0].lives);
+        p2_lives.text = ("VIDAS\n" + characters[1].lives);
+
+    }
 }
 
 

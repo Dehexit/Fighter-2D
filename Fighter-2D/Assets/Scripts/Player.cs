@@ -7,7 +7,7 @@ public class Player: Character {
     public string current_attack_string;
 
     public void initialize() {
-        lives = 3;
+        //lives = 3;
     }
 
     public override void DoAttack() {

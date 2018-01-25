@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AI: Character {
 
-    public Player player;
+    private Player player;
 
     private string opc = "";
     private string totalElecs = "", predictGuess = "", registerGuess = "";
@@ -16,7 +16,7 @@ public class AI: Character {
 
     public void initialize(Player player) {
         this.player = player;
-        lives = 3;
+        //lives = 3;
         data = new Dictionary<string, DataRecord>();
         possibleActions = "ABC";
     }
