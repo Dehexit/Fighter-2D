@@ -60,14 +60,15 @@ public class AI: Character {
     }
 
     public override void DoAttack() {
-        Debug.Log("Ataque de IA");
+        //Debug.Log("Ataque de IA");
 
-        opc = player.current_attack.ToString();
+        opc = player.current_attack.type.ToString();
         total++;
 
         string prediction = GetMostLikely(predictGuess);
-        Debug.Log("AI guess: " + prediction);
-        current_attack = new Attack(Attack.stringToAttack(prediction));
+        Attack guess_attack = new Attack(Attack.stringToAttack(prediction));
+        current_attack = new Attack(guess_attack.LosesTo());
+        Debug.Log("AI guess: " + prediction + "; AI plays: " + current_attack.type.ToString());
 
         if (prediction == opc) {
             rightGuess++;

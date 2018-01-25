@@ -63,20 +63,20 @@ public class Attack {
         }
     }
     
-    public override string ToString() {
+    //public override string ToString() {
 
-        switch(type) {
+    //    switch(type) {
 
-            case AType.A:
-                return "A";
-            case AType.B:
-                return "B";
-            case AType.C:
-                return "C";
-            default:
-                Debug.Log("Error in attack buttons");
-                throw new System.Exception("Error in attack buttons");
-        }
-    }
+    //        case AType.A:
+    //            return "A";
+    //        case AType.B:
+    //            return "B";
+    //        case AType.C:
+    //            return "C";
+    //        default:
+    //            Debug.Log("Error in attack buttons");
+    //            throw new System.Exception("Error in attack buttons");
+    //    }
+    //}
 
 }

@@ -24,6 +24,7 @@ public class GameController : MonoBehaviour {
             Destroy(gameObject);
         DontDestroyOnLoad(gameObject);
 
+        player.initialize();
         ai.initialize(player);
 
         //Initialise in a menu
@@ -69,9 +70,15 @@ public class GameController : MonoBehaviour {
             characters[1].lives--;
         }
 
-        if(CheckWinner() != null) {
+        Character winner = CheckWinner();
+        if(winner != null) {
             gameOver = true;
             Debug.Log("GAME OVER");
+            if(winner == characters[0]) {
+                Debug.Log("PLAYER 1 WINS");
+            } else {
+                Debug.Log("PLAYER 2 WINS");
+            }
         } else {
             StartCoroutine(WaitForInput(player));
         }
@@ -79,7 +86,7 @@ public class GameController : MonoBehaviour {
     }
 
     /// <summary>
-    /// Returns winner Character or null                ESTÁ MAL!!
+    /// Returns winner Character or null
     /// </summary>
     /// <returns></returns>
     public Character CheckWinner() {
