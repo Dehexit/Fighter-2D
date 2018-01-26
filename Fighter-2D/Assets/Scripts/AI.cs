@@ -1,15 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
+//line 80 
 public class AI: Character {
 
+    public Text PercentageGuessElement;  
     private Player player;
 
     private string opc = "";
     private string totalElecs = "", predictGuess = "", registerGuess = "";
     private int windowSize = 2;
-    private int total = 0, rightGuess = 0;
+    private int total = 0, rightGuess = 0; 
 
     private Dictionary<string, DataRecord> data;
     private string possibleActions;
@@ -19,7 +21,8 @@ public class AI: Character {
         //lives = 3;
         data = new Dictionary<string, DataRecord>();
         possibleActions = "ABC";
-    }
+
+        }
 
     public string GetMostLikely(string actions) {
         DataRecord keyData;
@@ -76,7 +79,9 @@ public class AI: Character {
         } else {
             Debug.Log("AI failed guessing");
         }
+
         Debug.Log("Correct guess rate: " + (100 * (float)rightGuess / total));
+        PercentageGuessElement.text = "Guess\nRate\n" + (100 * (float)rightGuess / total).ToString() + "%";
 
         totalElecs += opc;
 
@@ -97,4 +102,5 @@ public class AI: Character {
         //Debug.Log("Prediction guesses: " + predictGuess);
         //Debug.Log("Register guesses: " + registerGuess);
     }
+
 }
