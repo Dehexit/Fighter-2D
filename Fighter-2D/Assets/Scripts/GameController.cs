@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
 
@@ -19,7 +20,10 @@ public class GameController : MonoBehaviour {
     public Text p2_lives;
     public Text time_text;
     public Text winner_text;
-    public Text percentage_guess_element_UI; 
+    public Text final_winner_text;
+    public Text percentage_guess_element_UI;
+
+    public Button restart_button;
 
     public float timeOut = 10;
     
@@ -42,9 +46,10 @@ public class GameController : MonoBehaviour {
         attack = new Attack();
         gameOver = false;
         winner_text.enabled = false;
-        
         winner_text.text = "EMPTY!";
+        final_winner_text.text = "";
 
+        restart_button.gameObject.SetActive(false);
 
         //foreach (Player player in characters)
             StartCoroutine(WaitForInput(player));
@@ -84,13 +89,13 @@ public class GameController : MonoBehaviour {
             current.GetComponent<Animator>().Play("attack");
         }
 
-        yield return new WaitForSeconds(1.8f); 
+        yield return new WaitForSeconds(1.2f); 
 
         //Compare attack moves
         if(characters[0].current_attack.WinsTo() == characters[1].current_attack.type) {
             //First character wins round
             Debug.Log("Gana jugador 1");
-            winner_text.text = "P1";
+            winner_text.text = "Gana el jugador";
             characters[1].lives--;
             //characters[1].GetComponent<Animator>().Play("damaged");
             characters[1].GetComponent<Animator>().SetBool("attacked", true);
@@ -101,7 +106,7 @@ public class GameController : MonoBehaviour {
         } else  {
             //Second character wins round
             Debug.Log("Gana jugador 2");
-            winner_text.text = "P2";
+            winner_text.text = "Gana la IA";
             characters[0].lives--;
             //characters[0].GetComponent<Animator>().Play("damaged");
             characters[0].GetComponent<Animator>().SetBool("attacked", true);
@@ -122,10 +127,12 @@ public class GameController : MonoBehaviour {
             Debug.Log("GAME OVER");
             if(winner == characters[0]) {
                 Debug.Log("PLAYER 1 WINS");
-          
+                final_winner_text.text = "GANA EL JUGADOR";
             } else {
                 Debug.Log("PLAYER 2 WINS");
+                final_winner_text.text = "GANA LA IA";
             }
+            restart_button.gameObject.SetActive(true);
         } else {
             StartCoroutine(WaitForInput(player));
         }
@@ -150,6 +157,10 @@ public class GameController : MonoBehaviour {
         //    if (character.lives <= 0)
         //}
 
+    }
+
+    public void RestartGame() {
+        SceneManager.LoadScene("scene1");
     }
 
     // Update is called once per frame
