@@ -7,12 +7,11 @@ public class Player: Character {
     public string current_attack_string;
 
     public void initialize() {
-        //lives = 3;
+        //current_attack_string = "A";
     }
 
     public override void DoAttack() {
-        Debug.Log("Ataque de Player");
-        //StartCoroutine(waitForInput());
+        //Debug.Log("Ataque de Player");
 
         current_attack = new Attack(Attack.stringToAttack(current_attack_string));
 

@@ -93,8 +93,8 @@ public class AI: Character {
             RegisterSecuence(registerGuess);
         }
 
-        Debug.Log("Total guesses: " + totalElecs);
-        Debug.Log("Prediction guesses: " + predictGuess);
-        Debug.Log("Register guesses: " + registerGuess);
+        //Debug.Log("Total guesses: " + totalElecs);
+        //Debug.Log("Prediction guesses: " + predictGuess);
+        //Debug.Log("Register guesses: " + registerGuess);
     }
 }

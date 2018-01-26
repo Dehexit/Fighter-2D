@@ -17,6 +17,9 @@ public class GameController : MonoBehaviour {
 
     public Text p1_lives;
     public Text p2_lives;
+    public Text time_text;
+
+    public float timeOut = 10;
 
     // Use this for initialization
     void Awake () {
@@ -47,8 +50,19 @@ public class GameController : MonoBehaviour {
 
         player.current_attack_string = "";
 
+        float currentTimeOut = timeOut;
+
         while(player.current_attack_string == "") {
-            yield return new WaitForEndOfFrame();
+
+            currentTimeOut -= .1f;
+            time_text.text = Math.Round(currentTimeOut, 3).ToString();
+
+            if(currentTimeOut < 0) {
+                player.current_attack_string = "A";
+                break;
+            }
+
+            yield return new WaitForSeconds(.1f);
         }
         Debug.Log("El jugador ha elegido" + player.current_attack_string);
         Turn();
@@ -56,17 +70,20 @@ public class GameController : MonoBehaviour {
 
     public void Turn() {
 
+        //Each of the characters attacks
         foreach (Character current in characters) {
+            current.GetComponent<Animator>().SetBool("attacked", false);
             current.DoAttack();
             current.GetComponent<Animator>().Play("attack");
         }
 
-        //Comparar ataques
+        //Compare attack moves
         if(characters[0].current_attack.WinsTo() == characters[1].current_attack.type) {
             //First character wins round
             Debug.Log("Gana jugador 1");
             characters[1].lives--;
             //characters[1].GetComponent<Animator>().Play("damaged");
+            characters[1].GetComponent<Animator>().SetBool("attacked", true);
         } else if(characters[0].current_attack.type == characters[1].current_attack.type) {
             //Tie
             Debug.Log("Empate");
@@ -75,6 +92,7 @@ public class GameController : MonoBehaviour {
             Debug.Log("Gana jugador 2");
             characters[0].lives--;
             //characters[0].GetComponent<Animator>().Play("damaged");
+            characters[0].GetComponent<Animator>().SetBool("attacked", true);
         }
 
         Character winner = CheckWinner();

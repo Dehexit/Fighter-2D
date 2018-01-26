@@ -10,8 +10,8 @@ public class Character : MonoBehaviour
     public Attack current_attack;
 
     // Use this for initialization
-    Player jug; 
-    AI ia; 
+    //Player jug; 
+    //AI ia; 
 
     public virtual void DoAttack()
     {
