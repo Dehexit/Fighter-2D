@@ -23,6 +23,9 @@ public class GameController : MonoBehaviour {
     public Text final_winner_text;
     public Text percentage_guess_element_UI;
 
+    public AudioSource draw;
+    public AudioSource taking_damage;
+
     public Button restart_button;
 
     public float timeOut = 10;
@@ -96,17 +99,20 @@ public class GameController : MonoBehaviour {
             //First character wins round
             Debug.Log("Gana jugador 1");
             winner_text.text = "Gana el jugador";
+            taking_damage.Play();
             characters[1].lives--;
             //characters[1].GetComponent<Animator>().Play("damaged");
             characters[1].GetComponent<Animator>().SetBool("attacked", true);
         } else if(characters[0].current_attack.type == characters[1].current_attack.type) {
             //Tie
             winner_text.text = "DRAW";
+            draw.Play();
             Debug.Log("Empate");
         } else  {
             //Second character wins round
             Debug.Log("Gana jugador 2");
             winner_text.text = "Gana la IA";
+            taking_damage.Play();
             characters[0].lives--;
             //characters[0].GetComponent<Animator>().Play("damaged");
             characters[0].GetComponent<Animator>().SetBool("attacked", true);
